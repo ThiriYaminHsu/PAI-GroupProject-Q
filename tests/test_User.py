@@ -11,7 +11,7 @@ class TestUserModel(unittest.TestCase):
         self.user = User(
             user_id="u1001",
             first_name="John",
-            lastname="Doge",
+            last_name="Doge",
             password_hash="hashed_secret",
             role=UserRole.STUDENT
         )
@@ -20,6 +20,8 @@ class TestUserModel(unittest.TestCase):
         # test data class initialization #
         self.assertEqual(self.user.user_id, "u1001")
         self.assertEqual(self.user.first_name, "John")
+        self.assertEqual(self.user.last_name, "Doge")
+        self.assertEqual(self.user.password_hash, "hashed_secret")
         self.assertEqual(self.user.role, UserRole.STUDENT)
 
     def test_equality(self):
