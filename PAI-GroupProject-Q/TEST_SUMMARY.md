@@ -18,13 +18,33 @@ Tests for database connection management.
 - ✅ `test_get_db_connection_handles_null_values` - Verify NULL handling
 
 #### TestGetDbPool
+# TDD Test Suite Summary
+
+## Overview
+Comprehensive Test-Driven Development (TDD) test suite for the Student Wellbeing App database layer.
+
+## Test Files
+
+### 1. **test_connection.py** (10 tests)
+Tests for database connection management.
+
+#### TestGetDbConnection
+- ✅ `test_get_db_connection_returns_connection_object` - Verify valid sqlite3.Connection returned
+- ✅ `test_get_db_connection_enforces_foreign_keys` - Verify FK constraints are enabled
+- ✅ `test_get_db_connection_returns_row_objects` - Verify sqlite3.Row factory configured
+- ✅ `test_get_db_connection_row_dict_access` - Verify Row supports dict and index access
+- ✅ `test_get_db_connection_independent_instances` - Verify each call returns new instance
+- ✅ `test_get_db_connection_can_execute_queries` - Verify query execution works
+- ✅ `test_get_db_connection_handles_null_values` - Verify NULL handling
+
+#### TestGetDbPool
 - ✅ `test_get_db_pool_returns_connection` - Verify pool returns connection
 - ✅ `test_get_db_pool_has_foreign_keys_enabled` - Verify FK constraints in pool
 - ✅ `test_get_db_pool_independent_from_get_db_connection` - Verify independence
 
 ---
 
-### 2. **test_migrations.py** (23 tests)
+### 2. **test_migrations.py** (26 tests)
 Tests for database schema creation and integrity.
 
 #### TestRunMigrationsCreatesTables
@@ -75,7 +95,7 @@ Tests for database schema creation and integrity.
 
 ---
 
-### 3. **test_integration.py** (New - 12 tests)
+### 3. **test_integration.py** (8 tests)
 End-to-end integration tests simulating realistic workflows.
 
 #### TestStudentWorkflow
@@ -96,13 +116,22 @@ End-to-end integration tests simulating realistic workflows.
 
 ---
 
+### 4. **test_wipe_database.py** (2 tests)
+Script-level tests for `WipeDatabase.py` focusing on file deletion behavior.
+
+- ✅ `test_wipe_database_when_file_missing` - Script prints a warning and leaves filesystem unchanged
+- ✅ `test_wipe_database_deletes_file` - Script deletes the SQLite file and prints success
+
+---
+
 ## Test Coverage Summary
 
 | Component | Tests | Status |
 |-----------|-------|--------|
-| Connection Management | 11 | ✅ PASSING |
-| Schema Validation | 23 | ✅ PASSING |
-| Integration Workflows | 12 | ✅ PASSING |
+| Connection Management | 10 | ✅ PASSING |
+| Schema Validation | 26 | ✅ PASSING |
+| Integration Workflows | 8 | ✅ PASSING |
+| Script-level Utilities | 2 | ✅ PASSING |
 | **Total** | **46** | **✅ ALL PASSING** |
 
 ---
@@ -156,6 +185,7 @@ pytest tests/
 pytest tests/test_connection.py
 pytest tests/test_migrations.py
 pytest tests/test_integration.py
+pytest tests/test_wipe_database.py
 
 # Run with verbose output
 pytest tests/ -v
@@ -200,3 +230,5 @@ pytest tests/ --cov=src
 - Backup and restore procedures
 - Query optimization verification
 - Data privacy compliance tests
+
+
